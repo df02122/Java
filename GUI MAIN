@@ -1,0 +1,299 @@
+/**
+ * Add an image to this class GUI Nort panel window
+ *  
+ * @author David Ferebee 
+ * @version 4/18/2017
+ */
+import javax.swing.*;               //swing classes 
+import java.awt.event.*;            //Listener Interface
+import java.awt.*;                  //BorderLayout class
+public class GUIMainDSF extends JFrame
+{
+    private JPanel panelNorthDSF;           //To refrenece the panel on the top 
+    private JPanel panelCenterDSF;          //To refrenece the panel on the center
+    private JPanel panelSouthDSF;           //To refrenece the panel on the bottom
+    
+    private JLabel AccountNumberDSF;
+    private JLabel DepositAmountDSF;        //To reference the label of employee last name
+    private JLabel OverdrawDSF;          //To reference the label of employee salary/pay rate
+    private JLabel blankSpacerDSF;          //To reference a new line
+
+    private JTextField AccountNumberTextFieldDSF;       //To reference the text field of employee first name 
+    private JTextField DepositAmountTextFieldDSF;        //To reference the text field of employee last name
+    private JTextField OverdrawTextFieldDSF;          //To reference the text field of employee salary/pay rate
+    
+    
+    private JTextArea resultsDisplayTextAreaDSF;    //To reference the text area to display the results 
+    
+    
+    private JButton displayButtonDSF;               //To reference the button of Display
+    private JButton DepositButtonDSF;      //To reference the button of Calculate Payroll
+    private JButton clearButtonDSF;                 //To reference the button of Clear
+    
+    
+    private JRadioButton CheckingAccountDSF;       //To reference the full time employee radio button
+    private JRadioButton SavingsAccountDSF;       //To reference the part time employee radio button
+    private ButtonGroup AGDSF;           //To reference the employee group
+    
+    private final int WINDOW_WIDTH = 1200;          //Window width
+    private final int WINDOW_HEIGHT = 675;          //Window height
+     /*
+     * Constructor
+     * 
+     */
+    public GUIMainDSF()
+    {
+        //Set the window title 
+        setTitle("Eagle Bank");
+        
+        //Set the size and location of the window 
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setLocation(300,300);
+        
+        //Specify what happens when the close icon (x) is clicked 
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        //Build the panels to the JFrame 
+        buildPanelNorthDSF();                   //Build the panel on the top 
+        buildPanelCenterDSF();                  //Build the panel at the center
+        buildPanelSouthDSF();                   //Build the panel at the bottom
+        
+        //Build the text area 
+        resultsDisplayTextAreaDSF = new JTextArea(3, 50);                           //Set up the size of the text area 
+        resultsDisplayTextAreaDSF.setEditable(false);                               //Set up the text area as read only
+        add(resultsDisplayTextAreaDSF, BorderLayout.EAST);                          //set up the border layput location 
+        resultsDisplayTextAreaDSF.setBackground(Color.YELLOW);                      //set up the text area background color 
+        resultsDisplayTextAreaDSF.setFont(new Font("Georgia", Font.PLAIN, 14));     //set up the font style and size of the text area 
+        
+        //Add the panels to the frames content pane 
+        this.add(panelNorthDSF, BorderLayout.NORTH);        //Add the north panel
+        this.add(panelCenterDSF, BorderLayout.CENTER);      //add the center panel 
+        this.add(panelSouthDSF, BorderLayout.SOUTH);        //add the south panel 
+        
+        setVisible(true);
+    }
+     /*
+     * This method defines the content of the panel on the top 
+     * 
+     */
+    private void buildPanelNorthDSF()
+    {
+        //Create a label of the panel to display the heading of this program. Set the font style to Arial, size 60, bold,
+        //and color white .
+        
+        JLabel labelTopDSF = new JLabel("Eagle Bank"); 
+        JLabel labelPicTopDSF = new JLabel(new ImageIcon("lewis.jpg")); //Create a JLabel object to the top panel 
+        labelTopDSF.setFont(new Font ("Arial", Font.BOLD, 60));    //set up the font style and size of the label
+      
+        //Create a JPanel object and set the background colot to BLUE 
+        panelNorthDSF = new JPanel();                               
+        panelNorthDSF.setBackground(Color.BLUE);                    //set up the background color of the top panel
+        
+        //Customize the panel objects 
+        labelTopDSF.setSize(new Dimension(500, 100));               //set up the size of the label 
+        
+        //Add the label to the panel 
+        panelNorthDSF.add(labelPicTopDSF);
+        panelNorthDSF.add(labelTopDSF);                             //add the label to the top panel 
+        labelTopDSF.setForeground(Color.WHITE);                     //set up the foreground color of the label
+    }
+    
+    /*
+     * This method defines the content of the panel at the center.
+     * 
+     */
+    private void buildPanelCenterDSF()
+    {
+        //Create a JPanel object and set the grid layout 
+        panelCenterDSF = new JPanel();                      //create a Jpanel object to the center panel 
+        panelCenterDSF.setLayout(new GridLayout(10, 2));    //set up the grid layout as 10 rows and 2 volumes 
+        
+        //Create and add the radio button 
+        CheckingAccountDSF = new JRadioButton("Checking Account", true);          //Create the full time employee radio button as the default selection 
+        CheckingAccountDSF.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        SavingsAccountDSF = new JRadioButton("Savings Account");                //create the part time employee radio button
+        SavingsAccountDSF.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        AGDSF = new ButtonGroup();                   //Create the employee group 
+        AGDSF.add(CheckingAccountDSF);  AGDSF.add(SavingsAccountDSF);          //add full time and part time employee to the group 
+        panelCenterDSF.add(CheckingAccountDSF);    panelCenterDSF.add(SavingsAccountDSF);               //add the full time and part time employee radio button to the panel
+        blankSpacerDSF = new JLabel("");    panelCenterDSF.add(blankSpacerDSF);     blankSpacerDSF = new JLabel("");    panelCenterDSF.add(blankSpacerDSF);     //add a new line
+        //Create and add the 4 labels and 4 text fields 
+        AccountNumberDSF = new JLabel("Account Number:");                               //set up the 1st label
+        panelCenterDSF.add(AccountNumberDSF);                                       //add the 1st label to the center label 
+        AccountNumberDSF.setFont(new Font("Times New Roman", Font.BOLD, 16));       //set up the font style and size of the 1st label 
+        AccountNumberTextFieldDSF = new JTextField(20);                         //set up the size of the 1st text field 
+        panelCenterDSF.add(AccountNumberTextFieldDSF);                          //add the 1st text field to the center panel 
+        blankSpacerDSF = new JLabel("");    panelCenterDSF.add(blankSpacerDSF);     blankSpacerDSF = new JLabel("");        panelCenterDSF.add(blankSpacerDSF);     //add a new line
+        DepositAmountDSF = new JLabel("Deposit Amount:");                            //set up the 2nd label 
+        panelCenterDSF.add(DepositAmountDSF);                                   //add the 2nd label to the center panel 
+        DepositAmountDSF.setFont(new Font("Times New Roman", Font.BOLD, 16));        //set up the font style and size of the 2nd label 
+        DepositAmountTextFieldDSF = new JTextField(20);                              //set up the size of the 2nd text field 
+        panelCenterDSF.add(DepositAmountTextFieldDSF);                               //add the 2nd text field to the center panel 
+
+         
+        blankSpacerDSF = new JLabel("");    panelCenterDSF.add(blankSpacerDSF);     blankSpacerDSF = new JLabel("");        panelCenterDSF.add(blankSpacerDSF);     //add a new line
+        
+        OverdrawDSF = new JLabel("Overdraw/Active:");                     //set up the 3rd label 
+        panelCenterDSF.add(OverdrawDSF);                                         //add the 3rd label to the center panel 
+        OverdrawDSF.setFont(new Font("Times New Roman", Font.BOLD, 16));        //set up the font style and size of the 3rd label 
+        
+        OverdrawTextFieldDSF = new JTextField(20);                                    //set up the size of the 3rd text field 
+        panelCenterDSF.add(OverdrawTextFieldDSF);                                     //add the 3rd text field to the center panel 
+        
+}
+/*
+ * This method defines the conof the panel at the bottom .
+ * 
+ */
+private void buildPanelSouthDSF()
+{
+    //Create a JPanel object 
+    panelSouthDSF = new JPanel();
+    
+    //Create JButton objects 
+    displayButtonDSF = new JButton("Display");                          //create a JButton object to the bottom panel 
+    displayButtonDSF.setFont(new Font("Cambria", Font.ITALIC, 32));    //Set up font style and size of the button 
+    displayButtonDSF.addActionListener(new DisplayButtonListenerDSF());     //add action listener to the button and call the associated mehtod 
+    
+    DepositButtonDSF = new JButton("Deposit");           //Create a JButton object to the bottom panel 
+    DepositButtonDSF.setFont(new Font("Cambria", Font.ITALIC, 32));     // Set up font style and size of the button 
+    DepositButtonDSF.addActionListener(new DepositButtonListenerDSF());     //add action listener to the button and call the associated mehtod 
+    
+    clearButtonDSF = new JButton("Clear");                                          //Create a JButton object to the bottom panel 
+    clearButtonDSF.setFont(new Font("Cambria", Font.ITALIC, 32));     // Set up font style and size of the button 
+    clearButtonDSF.addActionListener(new ClearButtonListenerDSF());     //add action listener to the button and call the associated mehtod 
+    
+    //Add JButton objects to the bottom panel 
+    panelSouthDSF.add(displayButtonDSF);            //add the display button to the bottom panel 
+    panelSouthDSF.add(DepositButtonDSF);       //add the calculate payroll button to the bottom panel 
+    panelSouthDSF.add(clearButtonDSF);                  //add the clear button to the bottom panel 
+    
+    //Add color to the buttons 
+    displayButtonDSF.setForeground(Color.BLUE);                 //set up the display button font color 
+    DepositButtonDSF.setForeground(Color.BLUE);        //set up the calculate payroll button font color
+    clearButtonDSF.setForeground(Color.BLUE);                  //set up the clear button font color 
+    
+}
+
+/*
+ * This method defines the content of the panel at the bottom. 
+ * 
+ */
+
+private class DisplayButtonListenerDSF implements ActionListener
+{
+   
+    public void actionPerformed(ActionEvent e)
+    {
+        String AccountNumberDSF = AccountNumberTextFieldDSF.getText();               //assign the first name text field input to the variable
+        String DepositAmountDSF = DepositAmountTextFieldDSF.getText();                 //assign the last name text field input to the variable
+        String OverdrawDSF = OverdrawTextFieldDSF.getText();                    //assign the salary/pay rate text field input to the variable
+        if(CheckingAccountDSF.isSelected())
+        {
+            try
+            {
+                double  depositAmountDSF = Double.parseDouble(DepositAmountDSF);
+                boolean overDrawBooleanDSF = Boolean.parseBoolean(OverdrawDSF);         //Check whether the salary/pay rate text field input is double format
+                resultsDisplayTextAreaDSF.setForeground(Color.BLACK);           //set the foreground color of the text area to block 
+                CheckingAccountDSF checkaccDSF = new CheckingAccountDSF(AccountNumberDSF, depositAmountDSF, overDrawBooleanDSF);      //Ccreate a full time employee object with th user input values 
+               resultsDisplayTextAreaDSF.setText(checkaccDSF.toString());        //create a full time employee object 
+            }
+            catch (Exception ex)        //Display an error message when the salary input is not double 
+            {
+                resultsDisplayTextAreaDSF.setForeground(Color.RED);         //Set up the foreground color the text area to red 
+                resultsDisplayTextAreaDSF.setText("Enter numeric value in the Deposit Amount field.");       //display the following message in the text area 
+                resultsDisplayTextAreaDSF.setFont(new Font("Georgia", Font.PLAIN, 20));         //set up the font style and size of the message in the text area 
+            }
+        }
+        else 
+        {
+            try 
+            {
+                double depositAmountDSF = Double.parseDouble(DepositAmountDSF);     //Check whether the salary/pay rate text field input id double 
+                boolean overDrawBooleanDSF = Boolean.parseBoolean(OverdrawDSF);   //Check whether the hours worked text field input is integer format 
+                resultsDisplayTextAreaDSF.setForeground(Color.BLACK);       //set the foreground color of the text area to black 
+                SavingsAccountDSF saveaccDSF = new SavingsAccountDSF(AccountNumberDSF, depositAmountDSF, overDrawBooleanDSF);      //Ccreate a full time employee object with th user input values 
+                resultsDisplayTextAreaDSF.setText(saveaccDSF.toString());     //display the results in the text area 
+            }
+            catch (Exception ex)    //Display an error message when the pay rate and hours worked inputs are not integers 
+            {
+                resultsDisplayTextAreaDSF.setForeground(Color.RED);         //set up the foreground color the text area to red 
+                resultsDisplayTextAreaDSF.setText("Enter numeric value in the Deposit field.");        //display the following message in the text area 
+                resultsDisplayTextAreaDSF.setFont(new Font("Georgia", Font.PLAIN, 20));     //set up the font style and size of the message in the text area 
+            }
+        }
+    }
+}
+
+
+/*
+ * This class is an action listener class for the calculate payroll button.
+ */
+private class DepositButtonListenerDSF implements ActionListener
+{
+    /*
+     * The actionPerfomed method exceutes when the user clicks on the Calculate Payroll button.
+     * You must name this method exactly the same as actionPerformed
+     * @param e: The event object
+     */
+    public void actionPerformed(ActionEvent e)
+    {
+        String AccountNumberDSF = AccountNumberTextFieldDSF.getText();               //assign the first name text field input to the variable
+        String  DepositAmountDSF = DepositAmountTextFieldDSF.getText();                 //assign the last name text field input to the variable
+        String OverdrawDSF = OverdrawTextFieldDSF.getText();                    //assign the salary/pay rate text field input to the variable
+        
+        if(CheckingAccountDSF.isSelected())
+        {
+            try
+            {
+                double depositAmountDSF = Double.parseDouble(DepositAmountDSF);     //Check whether the salary/pay rate text field input id double 
+                boolean overDrawBooleanDSF = Boolean.parseBoolean(OverdrawDSF);   //Check whether the hours worked text field input is integer format 
+                CheckingAccountDSF checkacc = new CheckingAccountDSF(AccountNumberDSF, depositAmountDSF, overDrawBooleanDSF);     //create a full time employee object with th user input values 
+                resultsDisplayTextAreaDSF.setText(String.format("The chechking account balance is $  " + checkacc.depositDSF() + "\n" + "The payroll is calculated.\n" + checkacc.toString() + "\n"));        //display the results in the text area 
+				
+            }catch (Exception ex){
+                resultsDisplayTextAreaDSF.setForeground(Color.RED);         //Set up the foreground color the text area to red 
+                resultsDisplayTextAreaDSF.setText("You must enter numeric value in the Deposit Amount field");       //display the following message in the text area 
+                resultsDisplayTextAreaDSF.setFont(new Font("Georgia", Font.PLAIN, 20));         //set up the font style and size of the message in the text area 
+            }
+        }
+        else 
+        {
+            try 
+            {
+               double depositAmountDSF = Double.parseDouble(DepositAmountDSF);     //Check whether the salary/pay rate text field input id double 
+                boolean overDrawBooleanDSF = Boolean.parseBoolean(OverdrawDSF);   //Check whether the hours worked text field input is integer format 
+                SavingsAccountDSF saveacc = new SavingsAccountDSF(AccountNumberDSF, depositAmountDSF, overDrawBooleanDSF);     //create a full time employee object with th user input values 
+                
+                resultsDisplayTextAreaDSF.setText(String.format("The chechking account balance is  $" + saveacc.depositDSF() + "\n" + "The payroll is calculated.\n" + saveacc.toString() + "\n"));        //display the results in the text area 
+            }
+            catch (Exception ex)    //Display an error message when the pay rate and hours worked inputs are not integers 
+            {
+                resultsDisplayTextAreaDSF.setForeground(Color.RED);         //set up the foreground color the text area to red 
+                resultsDisplayTextAreaDSF.setText("You must enter numeric value in the Deposit Amount field.");        //display the following message in the text area 
+                resultsDisplayTextAreaDSF.setFont(new Font("Georgia", Font.PLAIN, 20));     //set up the font style and size of the message in the text area 
+            }
+        }
+    }
+}
+
+/*
+ * This class is an action listener class for the Clear button 
+ */
+private class ClearButtonListenerDSF implements ActionListener 
+{
+    public void actionPerformed(ActionEvent e)
+    {
+        AccountNumberTextFieldDSF.setText("");
+        DepositAmountTextFieldDSF.setText("");
+        OverdrawTextFieldDSF.setText("");
+        resultsDisplayTextAreaDSF.setText("");
+    }
+}
+public static void main (String [] args)
+{
+    //object 
+    new GUIMainDSF();
+}
+}
+
