@@ -1,0 +1,137 @@
+/**
+ * The purpose of this class is to define a GUI window that lets the user enter sales price and quantity. 
+ * When the calcualate button is clicked, a dialog box is displayed with the sales amount.
+ * 
+ * @author (David Ferebee) 
+ * @version (3/30/2017)
+ */
+
+import javax.swing.*;             // Need for Swing classes
+import java.awt.event.*;          // Needed for ActionListener Interface
+public class GUIMainDSF extends JFrame
+{
+   private JPanel panelDSF;                     // To reference a panel
+   private JLabel salesPriceLabelDSF;           // To reference a label of sales price input 
+   private JTextField salesPriceTextFieldDSF;   // To reference a text field of sale price input
+   private JLabel quantityLabelDSF;             // To reference a label of quantity input
+   private JTextField quantityTextFieldDSF;     // To reference a tect field of quantity input
+   private JButton calculateButtonDSF;          // To reference a button
+   private final int WINDOW_WIDTH = 400;        // Window width
+   private final int WINDOW_HEIGHT = 120;       // Window height
+   
+   /*
+    * Constructor
+    * 
+    */
+
+   public GUIMainDSF()
+   {
+       //Set the window title
+       setTitle("Sales Amount Calculator");
+       
+       // Set the size of the window 
+       setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+       
+       // Specify what happens when the close button is clicked
+       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       
+       // Build the panel and add it to the frame
+       buildPanelDSF();
+       
+       // Add the panel to the frames's content pane
+       add(panelDSF);
+       
+       // Display the window 
+       setVisible(true);
+       
+   }
+   
+   /*
+    *  This method adds two labels, two fields, and a button to a panel.
+    *  
+    */
+   private void buildPanelDSF()
+   {
+       //Create a label of the sales price field
+       salesPriceLabelDSF = new JLabel ("sales price: ");
+       
+       // Create a text field 10 characters wide
+       salesPriceTextFieldDSF = new JTextField(10);
+       
+       // Create a label of the quantity field
+       quantityLabelDSF = new JLabel("quantity: ");
+       
+       // Create a text field 10 characters wide
+       quantityTextFieldDSF = new JTextField(10);
+       
+       // Create a button with the caption "Calculate"
+       calculateButtonDSF = new JButton("Calculate");
+       
+       // Add an action listener to the button
+       calculateButtonDSF.addActionListener(new CalculateButtonListenerDSF());
+       
+       // Create a JPanel object and lt the panel field reference it
+       panelDSF = new JPanel();
+       
+       // Add the labels, text fields, and button components to the panel.
+       panelDSF.add(salesPriceLabelDSF);
+       panelDSF.add(salesPriceTextFieldDSF);
+       panelDSF.add(quantityLabelDSF);
+       panelDSF.add(quantityTextFieldDSF);
+       panelDSF.add(calculateButtonDSF);
+    }
+    
+    /*
+     * This class is an action listener class for the Calculate button.
+     * 
+     */
+    private class CalculateButtonListenerDSF implements ActionListener
+    {
+        /*
+         * The actionPerformed method executes when the user clicks on the Calculate button.
+         * You must name this method exact the same as actionPerformed.
+         * @param e: The event object
+         * 
+         */
+        
+        public void actionPerformed(ActionEvent e)
+        {
+            String salesPriceDSF, quantityDSF;                      // To hold the user's input
+            double salesPrice, salesAmountDSF;                      // To hold the sales price and sales amount
+            int quantity;                                           // To hold the quantity
+            
+            try // Get the valuse from text fields and convert to the adquate numeric data types 
+            {
+                // Get the text entered by the user into the text fields
+                salesPriceDSF = salesPriceTextFieldDSF.getText();
+                quantityDSF = quantityTextFieldDSF.getText();
+                
+                // Convert the input to double and integer
+                salesPrice = Double.parseDouble(salesPriceDSF);
+                quantity = Integer.parseInt(quantityDSF);
+                
+                // Calculate the sales amount
+                salesAmountDSF = salesPrice * quantity;
+                
+                // Display the result
+                JOptionPane.showMessageDialog(null, "The sales amount is $" + salesAmountDSF +
+                   " with the sales price of $" + salesPrice + " and quantity of " + quantity + ".");
+            }
+            catch (Exception ex) // Display error message
+            {
+                JOptionPane.showMessageDialog(null, "You must enter correct data types in the text fields.");
+            }
+            
+        }
+    }    
+    
+    /*
+     * main method
+     */
+    
+    public static void main(String[] args)
+    {
+        // create the window object
+        new GUIMainDSF();
+    }
+}
