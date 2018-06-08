@@ -1,0 +1,71 @@
+
+/**
+ * This lab is a sub class for AccountDSF 
+ * 
+ * @author David Ferebee 
+ * @version 4/18/2017
+ */
+public class CheckingAccountDSF extends AccountDSF
+{
+    private double amountDSF;
+    private boolean overDrawDSF;
+    //no args constructor
+    public CheckingAccountDSF()
+    {
+        super();
+		amountDSF = 34;
+        setOverDrawDSF(false);
+    }
+    //FP
+    public CheckingAccountDSF(String aNumberDSF,double amountDSF, boolean overDrawDSF)
+    {
+        super( aNumberDSF);
+        setOverDrawDSF(overDrawDSF);
+		this.amountDSF = amountDSF;
+    }
+    //OC
+    public CheckingAccountDSF(String aNumberDSF,String amountDSF,String overDrawDSF)
+    {
+        super(aNumberDSF);
+        this.overDrawDSF = Boolean.parseBoolean(overDrawDSF);
+		this.amountDSF = Double.parseDouble(amountDSF);
+    }
+    //Set
+    public void setOverDrawDSF(boolean overDrawDSF)
+    {
+        this.overDrawDSF = overDrawDSF; 
+    }
+    public void setActiveDSF(String overDrawDSF)
+    {
+        boolean newOverDrawDSF = Boolean.parseBoolean(overDrawDSF); 
+        this.overDrawDSF = newOverDrawDSF;
+    }
+    //Get Method
+    public boolean getOverDrawDSF()
+    {
+        return overDrawDSF; 
+    }
+        public String toString()
+    {
+        return  super.toString() + "\nDeposit: " + amountDSF + 
+								   "\nOver draw: " + overDrawDSF;
+    }
+    //deposit 
+    public double depositDSF() 
+    {
+               if(amountDSF < 0)
+       {
+             System.out.println("Add value must be greater than zero");
+             System.exit(0);
+       }   
+       else 
+       {
+             int noD = super.getNumberOfDepositsDSF();
+		     noD++;
+		     super.setNumberOfDepositsDSF(noD);
+			 return amountDSF;
+       }
+       return amountDSF;
+    }
+   
+}
