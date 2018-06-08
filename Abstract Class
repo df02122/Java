@@ -1,0 +1,82 @@
+/**
+ * Construct Account Class
+ * 
+ * @author Dave Ferebee
+ * @version 4/18/2017
+ */
+import java.text.DecimalFormat;
+public abstract class AccountDSF
+{
+   private String accountNumberDSF;
+   private double balanceDSF;
+   protected static int number = 100001;
+   private int numberOfDepositsDSF;
+   private int numberOfWithdrawsDSF;
+   //no-args constructor
+    public AccountDSF()
+    {
+        setAccountNumberDSF(number +"");
+        setNumberOfDepositsDSF(0);
+        setNumberOfWithdrawsDSF(0); 
+        number = number + 100000;        
+    }
+    //fully paramytized
+    public AccountDSF(String accountNumberDSF)
+    {
+        // instance variable
+        setAccountNumberDSF(accountNumberDSF);
+    }
+    //Get method
+    public String getAccountNumberDSF()
+    {
+        return accountNumberDSF;
+    }
+        public double getBalanceDSF()
+    {
+        return balanceDSF;
+    }
+        public int getNumberOfDepositsDSF()
+    {
+        return numberOfDepositsDSF;
+    }
+        public int getNumberOfWithdrawsDSF()
+    {
+        return numberOfWithdrawsDSF;
+    }
+    //Set method
+    public void setAccountNumberDSF(String accountNumberDSF)
+    {
+        this.accountNumberDSF = accountNumberDSF;
+    }
+           public void setNumberOfDepositsDSF(int numberOfDepositsDSF)
+    {
+        this.numberOfDepositsDSF = numberOfDepositsDSF;
+    }
+        //overloading setnumberofdeposits 
+     public void setNumberOfDepositsDSF(String numberOfDepositsDSF)
+    {
+        int newNumberOfDepositsDSF = Integer.parseInt(numberOfDepositsDSF);
+        this.numberOfDepositsDSF = newNumberOfDepositsDSF;
+    }
+        public void setNumberOfWithdrawsDSF(int numberOfWithdrawsDSF)
+    {
+        this.numberOfWithdrawsDSF = numberOfWithdrawsDSF;
+    }
+        //overloading the setnumberofwithdraw
+     public void setNumberOfWithdrawsDSF(String numberOfWithdrawsDSF)
+    {
+        int newNumberOfWithdrawsDSF = Integer.parseInt(numberOfWithdrawsDSF);
+        this.numberOfWithdrawsDSF = newNumberOfWithdrawsDSF;
+    }
+   //toString Method
+    public String toString()
+    {
+        DecimalFormat dollar = new DecimalFormat("#,###.00");
+        return "\nAccount Number:            " + accountNumberDSF +
+               /*"\nBalance:             $" + dollar.format(this.balanceDSF) + */
+               "\nNumber of Deposits:      " + numberOfDepositsDSF +
+               "\nNumber of Withdraws: " + numberOfWithdrawsDSF + "\n";
+    }
+   
+}
+
