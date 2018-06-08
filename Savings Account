@@ -1,0 +1,75 @@
+
+/**
+ * Subclass 
+ * 
+ * @author David Ferebee
+ * @version 4/18/2017
+ */
+
+public class SavingsAccountDSF extends AccountDSF
+{
+    private double amountDSF;
+    private boolean activeDSF;
+    
+    public SavingsAccountDSF()
+    {
+        // instance variables initi
+        super();
+        amountDSF = 76;
+        setActiveDSF(true);
+    }
+    public SavingsAccountDSF(String aNumberDSF, double amountDSF, boolean activeDSF)
+    {
+        super(aNumberDSF);
+        this.activeDSF = activeDSF;
+        this.amountDSF = amountDSF;
+    }
+    public SavingsAccountDSF(String aNumberDSF, String amountDSF, String activeDSF)
+    {
+        super(aNumberDSF);
+        this.activeDSF = Boolean.parseBoolean(activeDSF);
+        this.amountDSF = Double.parseDouble(amountDSF);
+    }
+    // Set method 
+    public void setActiveDSF(boolean activeDSF)
+    {
+        this.activeDSF = activeDSF;
+    }
+    
+    public void setActiveDSF(String activeDSF)
+    {
+        boolean newActiveDSF = Boolean.parseBoolean(activeDSF); 
+        this.activeDSF = newActiveDSF;
+    }
+    //Grt Method 
+    public boolean getActiveDSF()
+    {
+        return activeDSF;
+    }
+    //Deposit methid
+    public double depositDSF() 
+    {
+         if(amountDSF < 0)
+       {
+             System.out.println("Add value must be greater than zero");
+             System.exit(0);
+       }
+       else  
+       {
+             int nOD = super.getNumberOfDepositsDSF();
+		     nOD++;
+		     super.setNumberOfDepositsDSF(nOD);
+		     return amountDSF;
+	   }
+		     return amountDSF;
+    }
+    //toString method
+    public String toString()
+    {
+        return super.toString()+ "\nDeposit:"  + amountDSF + 
+                                  "\nActive:"  + activeDSF;
+    }
+        
+}
+
+
